@@ -11,7 +11,6 @@ rpm-ostree override remove \
     firefox-langpacks \
     fedora-workstation-repositories
 rpm-ostree install distrobox 
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
-rpm-ostree install google-chrome-stable_current_x86_64.rpm
-rm google-chrome-stable_current_x86_64.rpm -f
+rpm-ostree install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+rpm-ostree install /rpms/*.rpm
 echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
