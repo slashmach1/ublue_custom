@@ -13,8 +13,24 @@ flatpak install --noninteractive --system flathub \
     com.bitwarden.desktop \
     com.plexamp.Plexamp
 ### Install packages
+rpm-ostree override remove \
+		ffmpeg-free \
+		libavcodec-free \
+		libavdevice-free \
+		libavfilter-free \
+		libavformat-free \
+		libavutil-free \
+		libpostproc-free \
+		libswresample-free \
+		libswscale-free \
+		--install=ffmpeg \
+		--install=gstreamer1-plugin-libav \
+		--install=gstreamer1-plugins-bad-free-extras \
+		--install=gstreamer1-plugins-bad-freeworld \
+		--install=gstreamer1-plugins-ugly \
+		--install=gstreamer1-vaapi
 rpm-ostree override remove fedora-workstation-repositories
-rpm-ostree install distrobox openresolv iwd steam-devices steam
+rpm-ostree install distrobox openresolv iwd steam-devices steam libva-nvidia-driver intel-media-driver libva-intel-driver
 rpm-ostree install --idempotent /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm /tmp/hp-wmi-0-0.10.x86_64.rpm /tmp/kmod-hp-wmi-0-0.10.x86_64.rpm
 echo "AutomaticUpdatePolicy=stage" | sudo tee --append /usr/etc/rpm-ostreed.conf
 mkdir -p /usr/etc/NetworkManager/
