@@ -5,7 +5,7 @@ set -ouex pipefail
 RELEASE="$(rpm -E %fedora)"
 
 ### google chrome workaround
-cp /tmp/google-chrome.repo /etc/yum.repos.d/google-chrome.repo
+touch /etc/default/google-chrome
 ### Set flatpak
 mkdir -p /usr/etc/flatpak/remotes.d
 curl -Lo /usr/etc/flatpak/remotes.d/flathub.flatpakrepo https://dl.flathub.org/repo/flathub.flatpakrepo
