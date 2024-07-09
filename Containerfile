@@ -55,7 +55,7 @@ RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
 RUN mkdir -p /var/lib/alternatives && \
-    rpm-ostree install google-chrome-stable && \
+    rpm-ostree install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm && \
     rm /etc/yum.repos.d/google-chrome.repo -f && \
     rpm-ostree override remove firefox firefox-langpacks && \
     ostree container commit
