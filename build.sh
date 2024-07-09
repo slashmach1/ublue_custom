@@ -15,7 +15,7 @@ flatpak install --noninteractive --system flathub \
 ### Install packages
 rpm-ostree override remove fedora-workstation-repositories
 rpm-ostree install distrobox openresolv iwd steam-devices steam
-rpm-ostree install /tmp/hp-wmi-0-0.10.x86_64.rpm /tmp/kmod-hp-wmi-0-0.10.x86_64.rpm
+rpm-ostree install --idempotent /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm /tmp/hp-wmi-0-0.10.x86_64.rpm /tmp/kmod-hp-wmi-0-0.10.x86_64.rpm
 echo "AutomaticUpdatePolicy=stage" | sudo tee --append /usr/etc/rpm-ostreed.conf
 mkdir -p /usr/etc/NetworkManager/
 cp -r /tmp/NetworkManager/. /usr/etc/NetworkManager/
