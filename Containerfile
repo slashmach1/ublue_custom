@@ -50,6 +50,7 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 COPY /rpms/akmod-hp-wmi-0-0.10.x86_64.rpm /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm
 COPY /rpms/hp-wmi-0-0.10.x86_64.rpm /tmp/hp-wmi-0-0.10.x86_64.rpm
 COPY /rpms/kmod-hp-wmi-0-0.10.x86_64.rpm /tmp/kmod-hp-wmi-0-0.10.x86_64.rpm
+COPY /config/* /tmp
 COPY build.sh /tmp/build.sh
 
 RUN mkdir -p /var/lib/alternatives && \
