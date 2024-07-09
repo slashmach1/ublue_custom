@@ -22,7 +22,7 @@ cat << EOF > /etc/yum.repos.d/google-chrome.repo
 name=google-chrome
 baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
 enabled=1
-gpgcheck=1
+gpgcheck=0
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
 #rpm -e gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*
