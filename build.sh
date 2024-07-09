@@ -9,9 +9,7 @@ RELEASE="$(rpm -E %fedora)"
 rpm-ostree override remove \
     firefox \
     firefox-langpacks \
-    fedora-workstation-repositories
-
-rpm-ostree override remove \ 
+    fedora-workstation-repositories \
     libavcodec-free \
     libavfilter-free \
     libavformat-free \
@@ -19,13 +17,12 @@ rpm-ostree override remove \
     libpostproc-free \ 
     libswresample-free \ 
     libswscale-free \
-    --install ffmpeg
-    
-rpm-ostree override remove \
     wpa_supplicant \
+    --install ffmpeg
     --install iwd
                            
-rpm-ostree install distrobox \
+rpm-ostree install \
+    distrobox \
     gstreamer1-plugin-libav \
     gstreamer1-plugins-bad-free-extras \
     gstreamer1-plugins-bad-freeworld \
