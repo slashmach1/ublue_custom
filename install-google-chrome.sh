@@ -25,7 +25,8 @@ enabled=1
 gpgcheck=1
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
-rpm -e gpg-pubkey-d38b4796-570c8cd3
+rpm -e gpg-pubkey-7fac5991-* gpg-pubkey-d38b4796-*
+
 rpm --import https://dl.google.com/linux/linux_signing_key.pub
 # Now let's install the packages.
 rpm-ostree install google-chrome-stable
