@@ -29,13 +29,6 @@ curl --retry 3 --retry-delay 2 --retry-all-errors -sL \
   -o /etc/pki/rpm-gpg/RPM-GPG-KEY-google \
   https://dl.google.com/linux/linux_signing_key.pub
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-google
-
-# Now let's install the packages.
-rpm-ostree install google-chrome-stable
-
-# Clean up the yum repo (updates are baked into new images)
-rm /etc/yum.repos.d/google-chrome.repo -f
-rpm-ostree override remove firefox firefox-langpacks  
 rpm-ostree install ffmpeg gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly gstreamer1-vaapi 
 rpm-ostree override remove fedora-workstation-repositories
 rpm-ostree install distrobox openresolv iwd steam-devices steam libva-nvidia-driver intel-media-driver libva-intel-driver
