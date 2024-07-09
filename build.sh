@@ -6,7 +6,7 @@ RELEASE="$(rpm -E %fedora)"
 
 
 ### Install packages
-rpm-ostree override remove 
+rpm-ostree override remove \
     firefox \
     firefox-langpacks \
     fedora-workstation-repositories
