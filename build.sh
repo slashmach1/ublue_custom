@@ -11,26 +11,6 @@ RELEASE="$(rpm -E %fedora)"
 # RPMfusion repos are available by default in ublue main images
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
-#flatpak changes
-RUN flatpak uninstall --all --delete-data --assumeyes \
-&& flatpak remote-modify --disable fedora \
-&& flatpak remote-delete --system flathub  \
-&& flatpak remote-add --system --if-not-exists \
-&& flatpak remote-modify --enable flathub \
-&& flatpak install flathub \
-    org.mozilla.firefox 
-    org.freedesktop.Platform.ffmpeg-full 
-    com.github.tchx84.Flatseal 
-    
-#overrides
-RUN rpm-ostree override remove \
-    firefox 
-    firefox-langpacks 
-    fedora-workstation-repositories
-
-# this installs a package from fedora repos
-RUN rpm-ostree install 
-    distrobox
 
 #config
-RUN echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
+echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
