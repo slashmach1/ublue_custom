@@ -12,21 +12,25 @@ RELEASE="$(rpm -E %fedora)"
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 #flatpak changes
-flatpak uninstall --all --delete-data --assumeyes  # prefered flathub remote
-flatpak remote-modify --disable fedora
-flatpak remote-delete --system flathub  # remove filtered flathub remote
-flatpak remote-add --system --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak remote-modify --enable flathub
-flatpak install flathub \
-    org.mozilla.firefox \
-    org.freedesktop.Platform.ffmpeg-full  `# for firefox hardware decoding` \
+RUN flatpak uninstall --all --delete-data --assumeyes \
+&& flatpak remote-modify --disable fedora \
+&& flatpak remote-delete --system flathub  \
+&& flatpak remote-add --system --if-not-exists \
+&& flatpak remote-modify --enable flathub \
+&& flatpak install flathub \
+    org.mozilla.firefox 
+    org.freedesktop.Platform.ffmpeg-full 
     com.github.tchx84.Flatseal 
     
 #overrides
-rpm-ostree override remove firefox firefox-langpacks fedora-workstation-repositories
+RUN rpm-ostree override remove \
+    firefox 
+    firefox-langpacks 
+    fedora-workstation-repositories
 
 # this installs a package from fedora repos
-rpm-ostree install distrobox
+RUN rpm-ostree install 
+    distrobox
 
 #config
-echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
+RUN echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
