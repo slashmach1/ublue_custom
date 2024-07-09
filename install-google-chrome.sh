@@ -22,9 +22,11 @@ cat << EOF > /etc/yum.repos.d/google-chrome.repo
 name=google-chrome
 baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
 enabled=1
-gpgcheck=0
+gpgcheck=1
+gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
-
+rpm -e gpg-pubkey-d38b4796-570c8cd3
+rpm --import https://dl.google.com/linux/linux_signing_key.pub
 # Now let's install the packages.
 rpm-ostree install google-chrome-stable
 
