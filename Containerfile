@@ -51,9 +51,14 @@ COPY rpms/. /tmp/
 COPY config/. /tmp/
 COPY repo/google-chrome.repo /tmp/
 COPY build.sh /tmp/build.sh
+COPY install-google-chrome.sh /tmp/install-google-chrome.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
+RUN mkdir -p /var/lib/alternatives && \
+    /tmp/install-google-chrome.sh && \
+    ostree container commit
+
 ## NOTES:
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit

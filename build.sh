@@ -4,18 +4,23 @@ set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
 
-### google chrome
-cp /tmp/google-chrome.repo /etc/yum.repos.d/google-chrome.repo
-sed -i '0,/enabled=0/s//enabled=1/'  /etc/yum.repos.d/google-chrome.repo
 ### Set flatpak
-mkdir -p /usr/etc/flatpak/remotes.d
-curl -Lo /usr/etc/flatpak/remotes.d/flathub.flatpakrepo https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists --system flathub https://flathub.org/repo/flathub.flatpakrepo
+#flatpak uninstall --system --noninteractive `flatpak list --all --columns origin,application|grep ^fedora|awk '{print $2}'|xargs`
+flatpak remote-delete --system fedora --force
+flatpak install --noninteractive --system flathub \
+    app/com.github.tchx84.Flatseal/x86_64/stable \
+    app/io.github.dvlv.boxbuddyrs/x86_64/stable \
+    net.cozic.joplin_desktop \
+    com.bitwarden.desktop \
+    com.plexamp.Plexamp
 ### Install packages
-rpm-ostree override remove fedora-workstation-repositories firefox firefox-langpacks  
-rpm-ostree install distrobox openresolv iwd steam-devices
+rpm-ostree override remove fedora-workstation-repositories
+rpm-ostree install distrobox openresolv iwd steam-devices steam
 rpm-ostree install /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm /tmp/hp-wmi-0-0.10.x86_64.rpm /tmp/kmod-hp-wmi-0-0.10.x86_64.rpm
-echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
-cp -r /tmp/NetworkManager/. /etc/NetworkManager/
-cp -r /tmp/modprobe.d/. /etc/modprobe.d/
+echo "AutomaticUpdatePolicy=stage" | sudo tee --append /usr/etc/rpm-ostreed.conf
+cp -r /tmp/NetworkManager/. /usr/etc/NetworkManager/
+cp -r /tmp/modprobe.d/. /usr/etc/modprobe.d/
+cp -r /lib/sysctl.d/. /usr/etc/lib/sysctl.d/
 systemctl enable iwd.service
 systemctl disable wpa_supplicant.service
