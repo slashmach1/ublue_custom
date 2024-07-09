@@ -10,15 +10,19 @@ rpm-ostree override remove \
     firefox \
     firefox-langpacks \
     fedora-workstation-repositories
+    
 rpm-ostree override remove libavcodec-free \
-                           libavfilter-free libavformat-free \
+                           libavfilter-free \
+                           libavformat-free \
                            libavutil-free \
                            libpostproc-free \ 
                            libswresample-free \ 
                            libswscale-free \
                            --install ffmpeg
+                           
 rpm-ostree override remove wpa_supplicant \
                            --install iwd
+                           
 rpm-ostree install distrobox \
                    gstreamer1-plugin-libav \
                    gstreamer1-plugins-bad-free-extras \
@@ -29,6 +33,7 @@ rpm-ostree install distrobox \
                    libva-intel-driver \
                    libva-nvidia-driver \
                    openresolv
+                   
 cat <<EOF | tee /etc/NetworkManager/conf.d/wifi_backend.conf
 [device]
 wifi.backend=iwd
