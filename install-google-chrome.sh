@@ -29,7 +29,7 @@ rpm -e gpg-pubkey-d38b4796-570c8cd3
 rpm --import https://dl.google.com/linux/linux_signing_key.pub
 # Now let's install the packages.
 rpm-ostree install google-chrome-stable
-
+rpm-ostree install ffmpeg gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly gstreamer1-vaapi libva-nvidia-driver intel-media-driver libva-intel-driver
 # Clean up the yum repo (updates are baked into new images)
 rm /etc/yum.repos.d/google-chrome.repo -f
 rpm-ostree override remove firefox firefox-langpacks  
