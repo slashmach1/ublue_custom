@@ -47,6 +47,28 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
+#flatpak changes
+RUN flatpak uninstall --all --delete-data --assumeyes \
+&& flatpak remote-modify --disable fedora \
+&& flatpak remote-delete --system flathub  \
+&& flatpak remote-add --system --if-not-exists \
+&& flatpak remote-modify --enable flathub \
+&& flatpak install flathub \
+    org.mozilla.firefox \
+    org.freedesktop.Platform.ffmpeg-full \
+    com.github.tchx84.Flatseal \
+&& ostree container commit
+
+#overrides
+RUN rpm-ostree override remove \
+    firefox \
+    firefox-langpacks \
+    fedora-workstation-repositories \
+&& ostree container commit
+
+# this installs a package from fedora repos
+RUN rpm-ostree install distrobox \
+&& ostree container commit
 
 COPY build.sh /tmp/build.sh
 
