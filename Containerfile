@@ -49,6 +49,7 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 COPY rpms/. /tmp/
 COPY config/. /tmp/
+COPY repo/google-chrome.repo /tmp/
 COPY build.sh /tmp/build.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
