@@ -55,3 +55,4 @@ EOF
 rpm-ostree install https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 rpm-ostree install /rpms/*.rpm
 echo "AutomaticUpdatePolicy=stage" | sudo tee --append /etc/rpm-ostreed.conf
+systemctl enable iwd
