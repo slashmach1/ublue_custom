@@ -13,16 +13,12 @@ flatpak install --noninteractive --system flathub \
     com.bitwarden.desktop \
     com.plexamp.Plexamp
 ### Install packages
-rpm-ostree install ffmpeg gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly gstreamer1-vaapi
+rpm-ostree install ffmpeg gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly gstreamer1-vaapi 
 rpm-ostree override remove fedora-workstation-repositories
 rpm-ostree install distrobox openresolv iwd steam-devices steam libva-nvidia-driver intel-media-driver libva-intel-driver
 rpm-ostree install --idempotent /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm /tmp/hp-wmi-0-0.10.x86_64.rpm /tmp/kmod-hp-wmi-0-0.10.x86_64.rpm
-echo "AutomaticUpdatePolicy=stage" | sudo tee --append /usr/etc/rpm-ostreed.conf
-mkdir -p /usr/etc/NetworkManager/
-cp -r /tmp/NetworkManager/. /usr/etc/NetworkManager/
-mkdir -p /usr/etc/modprobe.d/
-cp -r /tmp/modprobe.d/. /usr/etc/modprobe.d/
-mkdir -p /usr/etc/lib/sysctl.d/
-cp -r /lib/sysctl.d/. /usr/etc/lib/sysctl.d/
+cp -r /tmp/NetworkManager/. /etc/NetworkManager/
+cp -r /tmp/modprobe.d/. /etc/modprobe.d/
+cp -r /tmp/lib/sysctl.d/. /etc/lib/sysctl.d/
 systemctl enable iwd.service
 systemctl disable wpa_supplicant.service

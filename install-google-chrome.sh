@@ -1,11 +1,6 @@
-#!/usr/bin/env sh
-
-# Thanks to bri for the inspiration! My script is based on this example:
-# https://github.com/briorg/bluefin/blob/c62c30a04d42fd959ea770722c6b51216b4ec45b/scripts/1password.sh
+#!/bin/bash
 
 set -ouex pipefail
-
-echo "Installing Google Chrome"
 
 # On libostree systems, /opt is a symlink to /var/opt,
 # which actually only exists on the live system. /var is
