@@ -44,7 +44,6 @@ ARG FEDORA_MAJOR_VERSION="${FEDORA_MAJOR_VERSION:-40}"
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
 FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
-
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
@@ -54,12 +53,11 @@ COPY build.sh /tmp/build.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
-COPY install-google-chrome.sh /tmp/install-google-chrome.sh
+COPY flatpak-setup.sh /tmp/
 RUN mkdir -p /var/lib/alternatives && \
-    bash /tmp/install-google-chrome.sh && \
+    bash /tmp/flatpak-setup.sh && \
     ostree container commit
-
-## NOTES:
-# - /var/lib/alternatives is required to prevent failure with some RPM installs
-# - All RUN commands must end with ostree container commit
-#   see: https://coreos.github.io/rpm-ostree/container/#using-ostree-container-commit
+#COPY install-google-chrome.sh /tmp/install-google-chrome.sh
+#RUN mkdir -p /var/lib/alternatives && \
+#    bash /tmp/install-google-chrome.sh && \
+#    ostree container commit
