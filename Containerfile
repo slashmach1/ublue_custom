@@ -57,3 +57,8 @@ COPY install-google-chrome.sh /tmp/install-google-chrome.sh
 RUN mkdir -p /var/lib/alternatives && \
     bash /tmp/install-google-chrome.sh && \
     ostree container commit
+COPY kernel-params.sh /tmp/kernel-params.sh
+RUN mkdir -p /var/lib/alternatives && \
+        bash /tmp/kernel-params.sh && \
+        ostree container commit
+COPY steam_dev.cfg /var/home/
