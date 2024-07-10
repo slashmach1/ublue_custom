@@ -4,7 +4,6 @@ set -ouex pipefail
 
 ## flatpak setup
 flatpak remote-add --if-not-exists --system flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak uninstall --system --noninteractive `flatpak list --all --columns origin,application|grep ^fedora|awk '{print $2}'|xargs`
 flatpak install --noninteractive --system flathub \
     app/org.fedoraproject.MediaWriter/x86_64/stable \
     app/org.kde.kcalc/x86_64/stable \
