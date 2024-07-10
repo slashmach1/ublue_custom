@@ -23,14 +23,7 @@ flatpak install --noninteractive --system flathub \
     net.cozic.joplin_desktop \
     com.bitwarden.desktop \
     com.plexamp.Plexamp \
-    com.google.Chrome \
     org.signal.Signal \
     org.kde.kdenlive \
     org.kde.krita \
-    com.discordapp.Discord \
-    com.mojang.Minecraft \
-    org.freedesktop.Platform.VulkanLayer.MangoHud//22.08 \
-    com.github.Matoking.protontricks \
-    com.valvesoftware.Steam \
-    com.valvesoftware.Steam.Utility.gamescope
-flatpak override --system --filesystem=~/.local/share/applications --filesystem=~/.local/share/icons com.google.Chrome
+    com.discordapp.Discord
