@@ -12,6 +12,7 @@ rpm-ostree install --idempotent /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm /tmp/hp-wmi-
 cp -r /tmp/NetworkManager/. /usr/lib/NetworkManager/
 cp -r /tmp/modprobe.d/. /usr/lib/modprobe.d/
 cp -r /tmp/lib/sysctl.d/. /usr/lib/sysctl.d/
+cp /tmp/rpm-ostreed.conf /etc/rpm-ostreed.conf
 systemctl enable iwd.service
 systemctl disable wpa_supplicant.service
 flatpak remote-add --if-not-exists --system flathub https://flathub.org/repo/flathub.flatpakrepo
