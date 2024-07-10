@@ -62,3 +62,4 @@ RUN mkdir -p /var/lib/alternatives && \
         bash /tmp/kernel-params.sh && \
         ostree container commit
 COPY steam_dev.cfg /var/home/
+COPY hp-omen-wmi.sh /var/home/
