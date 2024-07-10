@@ -53,7 +53,7 @@ COPY build.sh /tmp/build.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
-#COPY install-google-chrome.sh /tmp/install-google-chrome.sh
-#RUN mkdir -p /var/lib/alternatives && \
-#    bash /tmp/install-google-chrome.sh && \
-#    ostree container commit
+COPY install-google-chrome.sh /tmp/install-google-chrome.sh
+RUN mkdir -p /var/lib/alternatives && \
+    bash /tmp/install-google-chrome.sh && \
+    ostree container commit
