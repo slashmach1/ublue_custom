@@ -54,6 +54,10 @@ COPY build.sh /tmp/build.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
+RUN mkdir -p /usr/src/scripts && \
+    ostree container commit
+COPY steam_dev.cfg /usr/src/scripts/
+COPY hp-omen-wmi.sh /usr/src/scripts/
 COPY install-google-chrome.sh /tmp/install-google-chrome.sh
 #RUN mkdir -p /var/lib/alternatives && \
 #    chmod +x /tmp/install-google-chrome.sh && \
@@ -64,7 +68,3 @@ RUN rpm-ostree cliwrap install-to-root / && \
     ostree container commit && \
     mkdir -p /tmp /var/tmp && \
     chmod 1777 /tmp /var/tmp
-RUN mkdir -p /usr/src/scripts && \
-    ostree container commit
-COPY steam_dev.cfg /usr/src/scripts/
-COPY hp-omen-wmi.sh /usr/src/scripts/
