@@ -59,7 +59,11 @@ COPY install-google-chrome.sh /tmp/install-google-chrome.sh
 #    chmod +x /tmp/install-google-chrome.sh && \
 RUN rpm-ostree cliwrap install-to-root / && \
     /tmp/install-google-chrome.sh && \
-    ostree container commit
+    ostree container commit && \
+    rm -rf /tmp/* /var/* && \
+    ostree container commit && \
+    mkdir -p /tmp /var/tmp && \
+    chmod 1777 /tmp /var/tmp
 RUN mkdir -p /usr/src/scripts && \
     ostree container commit
 COPY steam_dev.cfg /usr/src/scripts/
