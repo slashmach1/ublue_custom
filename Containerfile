@@ -57,5 +57,5 @@ COPY install-google-chrome.sh /tmp/install-google-chrome.sh
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/install-google-chrome.sh && \
     ostree container commit
-COPY steam_dev.cfg /var/home/
-COPY hp-omen-wmi.sh /var/home/
+COPY steam_dev.cfg /usr/src/
+COPY hp-omen-wmi.sh /usr/src/
