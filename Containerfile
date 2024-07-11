@@ -62,6 +62,7 @@ COPY install-google-chrome.sh /tmp/install-google-chrome.sh
 #RUN mkdir -p /var/lib/alternatives && \
 #    chmod +x /tmp/install-google-chrome.sh && \
 RUN rpm-ostree cliwrap install-to-root / && \
+    chmod +x /tmp/install-google-chrome.sh && \
     /tmp/install-google-chrome.sh && \
     ostree container commit && \
     rm -rf /tmp/* /var/* && \
