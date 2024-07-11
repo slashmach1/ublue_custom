@@ -50,10 +50,6 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 COPY rpms/. /tmp/
 COPY config/. /tmp/
 COPY build.sh /tmp/build.sh
-RUN mkdir -p /usr/src/scripts && \
-    ostree container commit
-COPY steam_dev.cfg /usr/src/scripts/
-COPY hp-omen-wmi.sh /usr/src/scripts/
 RUN mkdir -p /var/lib/alternatives && \
     /tmp/build.sh && \
     ostree container commit
@@ -62,3 +58,7 @@ RUN mkdir -p /var/lib/alternatives && \
     chmod +x /tmp/install-google-chrome.sh && \
     /tmp/install-google-chrome.sh && \
     ostree container commit
+RUN mkdir -p /usr/src/scripts && \
+    ostree container commit
+COPY steam_dev.cfg /usr/src/scripts/
+COPY hp-omen-wmi.sh /usr/src/scripts/
