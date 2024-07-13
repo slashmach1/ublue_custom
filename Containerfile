@@ -59,8 +59,6 @@ RUN mkdir -p /usr/src/scripts && \
 COPY steam_dev.cfg /usr/src/scripts/
 COPY hp-omen-wmi.sh /usr/src/scripts/
 COPY install-google-chrome.sh /tmp/install-google-chrome.sh
-#RUN mkdir -p /var/lib/alternatives && \
-#    chmod +x /tmp/install-google-chrome.sh && \
 RUN rpm-ostree cliwrap install-to-root / && \
     chmod +x /tmp/install-google-chrome.sh && \
     /tmp/install-google-chrome.sh && \
