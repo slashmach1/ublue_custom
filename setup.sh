@@ -38,7 +38,7 @@ wget https://copr.fedorainfracloud.org/coprs/kylegospo/system76-scheduler/repo/f
 #rpm-ostree install distrobox system76-scheduler google-chrome-stable ffmpeg gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly gstreamer1-vaapi libva-nvidia-driver intel-media-driver libva-intel-driver openresolv iwd android-tools ptyxis tailscale wireguard-tools
 rpm-ostree install distrobox system76-scheduler openresolv iwd android-tools tailscale wireguard-tools steam-devices
 ## akmods installs
-rpm-ostree install --idempotent /tmp/*xpadneo*.rpm #/tmp/hp-wmi-0-0.10.x86_64.rpm /tmp/akmod-hp-wmi-0-0.10.x86_64.rpm 
+rpm-ostree install --idempotent /tmp/hp-*.rpm 
 ## overrides
 rpm-ostree override remove fedora-workstation-repositories firefox firefox-langpacks toolbox
 ## cleanup
