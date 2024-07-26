@@ -50,19 +50,17 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 COPY rpms/. /tmp/
 COPY --from=ghcr.io/ublue-os/akmods:main-40 /rpms/kmods/*xpadneo*.rpm /tmp/
 COPY config/. /tmp/
-COPY build.sh /tmp/build.sh
-RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
-    ostree container commit
-RUN mkdir -p /usr/src/scripts && \
-    ostree container commit
-COPY steam_dev.cfg /usr/src/scripts/
-COPY hp-omen-wmi.sh /usr/src/scripts/
-COPY install-google-chrome.sh /tmp/install-google-chrome.sh
+COPY *.sh /tmp/
+COPY steam_dev.cfg /tmp/
 RUN rpm-ostree cliwrap install-to-root / && \
     chmod +x /tmp/install-google-chrome.sh && \
     /tmp/install-google-chrome.sh && \
-    ostree container commit && \
+    chmod +x /tmp/system76-scheduler.sh && \
+    /tmp/system76-scheduler.sh && \
+    /tmp/build.sh && \
+    mkdir -p /usr/src/scripts && \
+    cp /tmp/hp-omen-wmi.sh /usr/src/scripts/ && \
+    cp /tmp/steam_dev.cfg /usr/src/scripts/ && \
     rm -rf /tmp/* /var/* && \
     ostree container commit && \
     mkdir -p /tmp /var/tmp && \
