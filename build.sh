@@ -21,6 +21,5 @@ systemctl enable flatpak-add-flathub-repo.service
 systemctl enable flatpak-replace-fedora-apps.service
 systemctl enable flatpak-cleanup.timer
 systemctl enable rpm-ostreed-automatic.timer
-systemctl enable iwd.service
 systemctl disable wpa_supplicant.service
 rm /etc/yum.repos.d/tailscale.repo
