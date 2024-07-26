@@ -13,6 +13,7 @@ rpm-ostree install --idempotent /tmp/*xpadneo*.rpm /tmp/hp-wmi-0-0.10.x86_64.rpm
 cp -r /tmp/NetworkManager/. /usr/lib/NetworkManager/
 cp -r /tmp/modprobe.d/. /usr/lib/modprobe.d/
 cp -r /tmp/lib/sysctl.d/. /usr/lib/sysctl.d/
+cp -r /tmp/share/. /usr/share/
 cp -r /tmp/lib/systemd/. /usr/lib/systemd/
 cp /tmp/rpm-ostreed.conf /etc/rpm-ostreed.conf
 chmod go-w /usr/lib/systemd/system/*.*
