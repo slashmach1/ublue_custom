@@ -48,30 +48,38 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 COPY rpms/. /tmp/
-COPY --from=ghcr.io/ublue-os/akmods:main-40 /rpms/kmods/*xpadneo*.rpm /tmp/
-COPY config/. /tmp/
-COPY *.sh /tmp/
-COPY steam_dev.cfg /tmp/
-RUN rpm-ostree cliwrap install-to-root / && \
-    chmod +x /tmp/setup.sh && \
-    /tmp/setup.sh && \
+COPY setup-hp-wmi.sh /tmp/
+COPY hp-omen-wmi.sh /tmp/
+RUN  rpm-ostree cliwrap install-to-root / && \
+    chmod +x /tmp/setup-hp-wmi.sh && \
+    /tmp/setup-hp-wmi.sh && \
     mkdir -p /usr/src/scripts && \
     cp /tmp/hp-omen-wmi.sh /usr/src/scripts/ && \
-    cp /tmp/steam_dev.cfg /usr/src/scripts/ && \
+    rm -rf /tmp/* /var/* && \
+    ostree container commit && \
+    mkdir -p /tmp /var/tmp && \
+    chmod 1777 /tmp /var/tmp
+COPY setup-system.sh /tmp/
+RUN  rpm-ostree cliwrap install-to-root / && \
+    chmod +x /tmp/setup-system.sh && \
+    /tmp/setup-system.sh && \
+    rm -rf /tmp/* /var/* && \
+    ostree container commit && \
+    mkdir -p /tmp /var/tmp && \
+    chmod 1777 /tmp /var/tmp  
+COPY --from=ghcr.io/ublue-os/akmods:main-40 /rpms/kmods/*xpadneo*.rpm /tmp/
+COPY setup-addons.sh /tmp/
+RUN rpm-ostree cliwrap install-to-root / && \
+    chmod +x /tmp/setup-addons.sh && \
+    /tmp/setup-addons.sh && \
     rm -rf /tmp/* /var/* && \
     ostree container commit && \
     mkdir -p /tmp /var/tmp && \
     chmod 1777 /tmp /var/tmp    
-#RUN rpm-ostree cliwrap install-to-root / && \
-#    chmod +x /tmp/install-google-chrome.sh && \
-#    /tmp/install-google-chrome.sh && \
-#    chmod +x /tmp/system76-scheduler.sh && \
-#    /tmp/system76-scheduler.sh && \
-#    /tmp/build.sh && \
-#    mkdir -p /usr/src/scripts && \
-#    cp /tmp/hp-omen-wmi.sh /usr/src/scripts/ && \
-#    cp /tmp/steam_dev.cfg /usr/src/scripts/ && \
-#    rm -rf /tmp/* /var/* && \
-#    ostree container commit && \
-#    mkdir -p /tmp /var/tmp && \
-#    chmod 1777 /tmp /var/tmp
+COPY setup-configs.sh /tmp/
+COPY steam_dev.cfg /tmp/
+RUN  rpm-ostree cliwrap install-to-root / && \
+    chmod +x /tmp/setup-configs.sh && \
+    /tmp/setup-configs.sh && \
+    cp /tmp/steam_dev.cfg /usr/src/scripts/ && \
+    ostree container commit
