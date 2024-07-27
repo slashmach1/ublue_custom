@@ -4,6 +4,11 @@ set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
 
+# Prepare staging directory
+mkdir -p /var/opt # -p just in case it exists
+
+# Prepare alternatives directory
+mkdir -p /var/lib/alternatives
 cat << EOF > /etc/yum.repos.d/google-chrome.repo
 [google-chrome]
 name=google-chrome
