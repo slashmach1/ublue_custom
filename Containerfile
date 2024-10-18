@@ -49,12 +49,12 @@ FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 COPY rpms/. /tmp/
 COPY setup-hp-wmi.sh /tmp/
-COPY hp-omen-wmi.sh /tmp/
+COPY hp-set-lighting /tmp/
 RUN  rpm-ostree cliwrap install-to-root / && \
     chmod +x /tmp/setup-hp-wmi.sh && \
     /tmp/setup-hp-wmi.sh && \
-    mkdir -p /usr/src/scripts && \
-    cp /tmp/hp-omen-wmi.sh /usr/src/scripts/ && \
+    chmod +x /tmp/hp-set-lighting && \
+    cp /tmp/hp-set-lighting /usr/bin/hp-set-lighting && \
     rm -rf /tmp/* /var/* && \
     ostree container commit && \
     mkdir -p /tmp /var/tmp && \
@@ -68,6 +68,7 @@ RUN  rpm-ostree cliwrap install-to-root / && \
     mkdir -p /tmp /var/tmp && \
     chmod 1777 /tmp /var/tmp  
 COPY --from=ghcr.io/ublue-os/akmods:main-40 /rpms/kmods/*xpadneo*.rpm /tmp/
+COPY --from=ghcr.io/ublue-os/akmods:main-40 /rpms/kmods/*xone*.rpm /tmp/
 COPY setup-addons.sh /tmp/
 RUN rpm-ostree cliwrap install-to-root / && \
     chmod +x /tmp/setup-addons.sh && \
@@ -81,5 +82,6 @@ COPY steam_dev.cfg /tmp/
 RUN  rpm-ostree cliwrap install-to-root / && \
     chmod +x /tmp/setup-configs.sh && \
     /tmp/setup-configs.sh && \
+    mkdir -vp /usr/src/scripts && \
     cp /tmp/steam_dev.cfg /usr/src/scripts/ && \
     ostree container commit
