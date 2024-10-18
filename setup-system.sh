@@ -24,7 +24,7 @@ curl --retry 3 --retry-delay 2 --retry-all-errors -sL \
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-google
 
 ## package installs
-rpm-ostree install google-chrome-stable ffmpeg gstreamer1-plugin-libav gstreamer1-plugins-bad-free-extras gstreamer1-plugins-bad-freeworld gstreamer1-plugins-ugly gstreamer1-vaapi libva-nvidia-driver
+rpm-ostree install google-chrome-stable
 ## overrides
 rpm-ostree override remove fedora-workstation-repositories firefox firefox-langpacks wpa_supplicant
 ## cleanup
