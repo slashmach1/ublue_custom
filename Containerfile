@@ -79,6 +79,7 @@ RUN rpm-ostree cliwrap install-to-root / && \
     chmod 1777 /tmp /var/tmp    
 COPY setup-configs.sh /tmp/
 COPY steam_dev.cfg /tmp/
+COPY config/* /tmp/
 RUN  rpm-ostree cliwrap install-to-root / && \
     chmod +x /tmp/setup-configs.sh && \
     /tmp/setup-configs.sh && \
